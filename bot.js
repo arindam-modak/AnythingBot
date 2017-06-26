@@ -392,6 +392,24 @@ $(document).ready(function() {
 				display('&nbsp&nbsp<a href="https://www.google.co.in/maps/dir/' + source +'/' + dest + '/@19.2613671,72.8574557,14z" class="btn btn-default">GET THE DIRECTIONS</a>');
 				window.scrollBy(0, 5000);
 		}
+		var r="";
+	        var loc1 = val1.match(/location/g);
+	        var loc2 = val1.match(/my/g);
+		var loc3 = val1.match(/current/g);
+	        var loc4 = val1.match(/where/g);
+	        var loc5 = val1.match(/I/g);
+		if(((loc1 && loc2) || (loc3 && loc1) || (loc4 && loc5)) && flag==0 ){
+		   flag=1;
+		   
+		   if (navigator.geolocation) {
+                                  navigator.geolocation.getCurrentPosition(showPosition);
+                       } else { 
+                                  r.innerHTML = "Geolocation is not supported by this browser.";
+                       }
+                       
+                        window.scrollBy(0,4000);
+		   
+		}
 
 		if(flag == 0)
  				display('Ahh ! Whut ... seems alien to me, Search this on Google instead ? <br><br> <a href="https://www.google.co.in/?gfe_rd=cr&ei=WohPWZeAIrPT8gfkz5_ADA&gws_rd=ssl#q=' + val1 + '" class="btn btn-default">&nbspSEARCH</a>');
@@ -401,8 +419,14 @@ $(document).ready(function() {
 		event.preventDefault();
 	});	
 
-	function weather(data) {
-	return data.weather[0].description;
+function showPosition(position) {
+    var source = "";
+    source += position.coords.latitude + "," + position.coords.longitude;
+    display('&nbsp&nbsp<a href="https://www.google.co.in/maps/place/' + source  + '/@25.4432533,81.7678107" class="btn btn-default">Locate your Position</a>');
+}
+	
+function weather(data) {
+        return data.weather[0].description;
 }
 function temp(data) {
 	return data.main.temp + "&deg;C";
