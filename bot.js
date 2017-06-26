@@ -379,8 +379,14 @@ $(document).ready(function() {
 				continue;
 			}
 		}
-		var source = dirr[index1 + 1];
-		var dest = dirr[index2 + 1];
+		var source = "";
+                var dest = "";
+                for(var z = index1 + 1; z < index2; z++) {
+                      source += dirr[z]+"+";
+                }
+                for(var z = index2 + 1; z < dirr.length; z++) {
+                      dest += dirr[z]+"+";
+                }
 		if(dir1 || dir2) {
 			flag = 1;
 				display('&nbsp&nbsp<a href="https://www.google.co.in/maps/dir/' + source +'/' + dest + '/@19.2613671,72.8574557,14z" class="btn btn-default">GET THE DIRECTIONS</a>');
